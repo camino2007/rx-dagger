@@ -1,4 +1,4 @@
-<manifest package="com.camino.domain"
+<manifest package="com.camino.rxdagger.domain"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application android:allowBackup="true"
