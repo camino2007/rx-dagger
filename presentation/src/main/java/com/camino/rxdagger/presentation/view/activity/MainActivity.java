@@ -1,4 +1,4 @@
-package com.camino.rxdagger.presentation.view;
+package com.camino.rxdagger.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,13 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.camino.rxdagger.presentation.R;
+import com.camino.rxdagger.presentation.internal.HasComponent;
+import com.camino.rxdagger.presentation.internal.components.ApiComponent;
+import com.camino.rxdagger.presentation.internal.components.DaggerApiComponent;
+import com.camino.rxdagger.presentation.internal.modules.ApiModule;
+import com.camino.rxdagger.presentation.view.fragment.MainFragment;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements HasComponent<ApiComponent> {
+
+    private ApiComponent mApiComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -27,6 +33,30 @@ public class MainActivity extends BaseActivity {
                         .setAction("Action", null).show();
             }
         });
+        initializeActivity(savedInstanceState);
+        initializeInjector();
+    }
+
+    private void initializeInjector() {
+        mApiComponent = DaggerApiComponent.builder()
+                .appComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .apiModule(new ApiModule("http://stage.beatclip.com/api/"))
+                .build();
+    }
+
+    private void initializeActivity(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, new MainFragment());
+        } else {
+           /* this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);*/
+        }
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @Override
@@ -49,5 +79,10 @@ public class MainActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public ApiComponent getComponent() {
+        return mApiComponent;
     }
 }

@@ -2,9 +2,8 @@ package com.camino.rxdagger.presentation;
 
 import android.app.Application;
 
-import com.camino.rxdagger.presentation.internal.components.ApiComponent;
-import com.camino.rxdagger.presentation.internal.components.DaggerApiComponent;
-import com.camino.rxdagger.presentation.internal.modules.ApiModule;
+import com.camino.rxdagger.presentation.internal.components.AppComponent;
+import com.camino.rxdagger.presentation.internal.components.DaggerAppComponent;
 import com.camino.rxdagger.presentation.internal.modules.AppModule;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -13,15 +12,14 @@ import com.squareup.leakcanary.LeakCanary;
  */
 public class BaseApplication extends Application {
 
-    private ApiComponent mApiComponent;
+    private AppComponent mAppComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mApiComponent = DaggerApiComponent.builder()
+        mAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .apiModule(new ApiModule("https://api.github.com"))
                 .build();
 
         if (BuildConfig.DEBUG) {
@@ -29,7 +27,7 @@ public class BaseApplication extends Application {
         }
     }
 
-    public ApiComponent getApiComponent() {
-        return mApiComponent;
+    public AppComponent getAppComponent() {
+        return mAppComponent;
     }
 }
