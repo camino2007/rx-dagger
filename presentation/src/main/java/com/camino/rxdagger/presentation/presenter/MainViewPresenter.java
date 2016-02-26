@@ -34,6 +34,7 @@ public class MainViewPresenter implements Presenter {
 
     @Override
     public void initialize() {
+        Log.d(TAG, "initialize");
         this.hideViewRetry();
         this.showViewLoading();
         mAccountLoader.execute(new ResultSubscriber());

@@ -27,7 +27,8 @@ public class MainFragment extends BaseFragment implements MainView {
         setRetainInstance(true);
     }
 
-    @Override public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getComponent(ApiComponent.class).inject(this);
     }
@@ -36,6 +37,7 @@ public class MainFragment extends BaseFragment implements MainView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mMainViewPresenter.setMainView(this);
+        Log.d(getTagText(), "onViewCreated");
         if (savedInstanceState == null) {
             mMainViewPresenter.initialize();
         }
@@ -54,6 +56,7 @@ public class MainFragment extends BaseFragment implements MainView {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(getTagText(), "onResume");
         mMainViewPresenter.resume();
     }
 

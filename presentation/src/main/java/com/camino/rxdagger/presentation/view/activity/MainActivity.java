@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,13 +34,13 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
                         .setAction("Action", null).show();
             }
         });
-        initializeActivity(savedInstanceState);
         initializeInjector();
     }
 
     @Override
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
+            Log.d(MainActivity.class.getSimpleName(), "initializeActivity");
             addFragment(R.id.fragment_container, new MainFragment());
         } else {
            /* this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);*/
@@ -47,6 +48,7 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
     }
 
     private void initializeInjector() {
+        Log.d(MainActivity.class.getSimpleName(), "initializeInjector");
         mApiComponent = DaggerApiComponent.builder()
                 .appComponent(getApplicationComponent())
                 .activityModule(getActivityModule())

@@ -1,6 +1,9 @@
 package com.camino.rxdagger.presentation.internal.modules;
 
+import android.app.Application;
+
 import com.camino.data.AccountLoader;
+import com.camino.rxdagger.presentation.BaseApplication;
 import com.camino.rxdagger.presentation.internal.PerActivity;
 import com.camino.rxdagger.presentation.util.BeatclipShortDateTypeAdapter;
 import com.google.gson.FieldNamingPolicy;
@@ -13,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -47,9 +51,9 @@ public class ApiModule {
         return new Cache(application.getCacheDir(), cacheSize);
     }
 
-
-
 */
+
+
 
     @Provides
     @PerActivity

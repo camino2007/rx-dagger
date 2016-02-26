@@ -16,7 +16,6 @@ public class AccountLoader extends ApiLoader {
 
     @Inject
     public AccountLoader(Retrofit retrofit) {
-        super(retrofit);
         mAccountApiService = retrofit.create(AccountApiService.class);
     }
 
