@@ -3,7 +3,7 @@ package com.camino.data.api;
 /**
  * Created by robert on 26.02.16.
  */
-public interface OtherApiService {
+public interface MiscellaneousApiService {
 
 /*
     @GET("/playStoreVersion.json")

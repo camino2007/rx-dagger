@@ -1,4 +1,4 @@
-package com.camino.data;
+package com.camino.data.loader;
 
 import com.camino.data.api.BeatClipApiService;
 
@@ -12,12 +12,12 @@ public class BeatClipLoader extends ApiLoader {
 
     private final BeatClipApiService mBeatClipApiService;
 
-    protected BeatClipLoader(Retrofit retrofit) {
+
+    public BeatClipLoader(Retrofit retrofit) {
         mBeatClipApiService = retrofit.create(BeatClipApiService.class);
     }
 
-    @Override
-    protected Observable buildObservable() {
+    public Observable getLatestBeatClipsObservable() {
         return mBeatClipApiService.getLatestBeatclips("");
     }
 }

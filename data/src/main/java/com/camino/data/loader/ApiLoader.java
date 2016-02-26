@@ -1,8 +1,7 @@
-package com.camino.data;
+package com.camino.data.loader;
 
 import android.util.Log;
 
-import retrofit2.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -17,12 +16,10 @@ public abstract class ApiLoader {
 
     private Subscription mSubscription = Subscriptions.empty();
 
-    protected abstract Observable buildObservable();
-
     @SuppressWarnings("unchecked")
-    public void execute(Subscriber subscriber) {
+    public void execute(Observable observable, Subscriber subscriber) {
         Log.d(ApiLoader.class.getSimpleName(), "execute");
-        mSubscription = this.buildObservable()
+        mSubscription = observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);

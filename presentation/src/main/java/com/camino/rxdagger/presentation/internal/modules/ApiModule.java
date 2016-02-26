@@ -2,7 +2,7 @@ package com.camino.rxdagger.presentation.internal.modules;
 
 import android.content.Context;
 
-import com.camino.data.AccountLoader;
+import com.camino.data.loader.AccountLoader;
 import com.camino.rxdagger.presentation.internal.PerActivity;
 import com.camino.rxdagger.presentation.util.BeatclipShortDateTypeAdapter;
 import com.google.gson.FieldNamingPolicy;
@@ -11,6 +11,8 @@ import com.google.gson.GsonBuilder;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;

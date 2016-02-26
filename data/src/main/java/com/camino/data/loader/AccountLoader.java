@@ -1,4 +1,4 @@
-package com.camino.data;
+package com.camino.data.loader;
 
 import com.camino.data.api.AccountApiService;
 
@@ -19,8 +19,8 @@ public class AccountLoader extends ApiLoader {
         mAccountApiService = retrofit.create(AccountApiService.class);
     }
 
-    @Override
-    protected Observable buildObservable() {
+    public Observable getLatestUsersObservable() {
         return mAccountApiService.getLatestUsers("");
     }
+
 }

@@ -2,8 +2,8 @@ package com.camino.rxdagger.presentation.presenter;
 
 import android.util.Log;
 
-import com.camino.data.AccountLoader;
 import com.camino.data.DefaultSubscriber;
+import com.camino.data.loader.AccountLoader;
 import com.camino.data.model.User;
 import com.camino.rxdagger.presentation.internal.PerActivity;
 import com.camino.rxdagger.presentation.view.MainView;
@@ -11,6 +11,8 @@ import com.camino.rxdagger.presentation.view.MainView;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import rx.Observable;
 
 /**
  * Created by robert on 25.02.16.
@@ -37,7 +39,8 @@ public class MainViewPresenter implements Presenter {
         Log.d(TAG, "initialize");
         this.hideViewRetry();
         this.showViewLoading();
-        mAccountLoader.execute(new ResultSubscriber());
+        Observable observable = mAccountLoader.getLatestUsersObservable();
+        mAccountLoader.execute(observable, new ResultSubscriber());
     }
 
     @Override
