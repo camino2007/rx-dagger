@@ -37,6 +37,15 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
         initializeInjector();
     }
 
+    @Override
+    protected void initializeActivity(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, new MainFragment());
+        } else {
+           /* this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);*/
+        }
+    }
+
     private void initializeInjector() {
         mApiComponent = DaggerApiComponent.builder()
                 .appComponent(getApplicationComponent())
@@ -45,17 +54,8 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
                 .build();
     }
 
-    private void initializeActivity(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            addFragment(R.id.fragment_container, new MainFragment());
-        } else {
-           /* this.userId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_USER_ID);*/
-        }
-    }
-
-
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.activity_main;
     }
 

@@ -22,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        initializeActivity(savedInstanceState);
     }
 
     @Override
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         ButterKnife.unbind(this);
     }
+
 
     /**
      * Adds a {@link Fragment} to this activity's layout.
@@ -61,6 +63,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public abstract int getLayoutId();
+    protected abstract int getLayoutId();
+
+    protected abstract void initializeActivity(Bundle savedInstanceState);
 
 }

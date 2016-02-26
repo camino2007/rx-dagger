@@ -19,8 +19,7 @@ ext {
     javaxAnnotationVersion = '1.0'
     gsonVersion = '2.6.1'
     retrofitVersion = '2.0.0-beta4'
-    //compile 'com.squareup.okhttp3:okhttp:3.1.2'
-    okHttpVersion = '3.1.2'
+    okHttpVersion = '3.2.0'
     androidAnnotationsVersion = '21.0.3'
     androidSupportVersion = '23.1.1'
 

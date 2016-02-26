@@ -1,4 +1,4 @@
-package com.camino.data;
+package com.camino.data.api;
 
 import com.camino.data.model.BeatClip;
 import com.camino.data.model.News;

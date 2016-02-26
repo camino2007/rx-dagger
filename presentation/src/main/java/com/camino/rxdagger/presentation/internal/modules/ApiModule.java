@@ -1,14 +1,15 @@
 package com.camino.rxdagger.presentation.internal.modules;
 
 import com.camino.data.AccountLoader;
-import com.camino.data.ApiLoader;
 import com.camino.rxdagger.presentation.internal.PerActivity;
+import com.camino.rxdagger.presentation.util.BeatclipShortDateTypeAdapter;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
@@ -53,17 +54,30 @@ public class ApiModule {
     @Provides
     @PerActivity
     OkHttpClient provideOkHttpClient() {
-        OkHttpClient okHttpClient = new OkHttpClient();
-        return okHttpClient;
+        return new OkHttpClient.Builder()
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .build();
     }
 
     @Provides
     @PerActivity
-    Gson provideGson() {
+    BeatclipShortDateTypeAdapter provideShortDateTypeAdapter() {
+        return new BeatclipShortDateTypeAdapter();
+    }
+
+    @Provides
+    @PerActivity
+    Gson provideGson(BeatclipShortDateTypeAdapter typeAdapter) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES);
+        if (typeAdapter != null) {
+            gsonBuilder.registerTypeAdapter(Date.class, typeAdapter);
+        }
         return gsonBuilder.create();
     }
+
 
     @Provides
     @PerActivity

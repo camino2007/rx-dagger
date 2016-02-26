@@ -92,7 +92,7 @@ public class MainViewPresenter implements Presenter {
 
         @Override
         public void onNext(List<User> userList) {
-            Log.d(TAG, "onNext");
+            Log.d(TAG, "onNext - userList.size(): " + userList.size());
             MainViewPresenter.this.showResult(userList);
         }
     }
