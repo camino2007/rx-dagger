@@ -3,6 +3,7 @@ package com.camino.rxdagger.presentation.internal.modules;
 import android.content.Context;
 
 import com.camino.data.loader.AccountLoader;
+import com.camino.data.loader.BeatClipLoader;
 import com.camino.rxdagger.presentation.internal.PerActivity;
 import com.camino.rxdagger.presentation.util.BeatclipShortDateTypeAdapter;
 import com.google.gson.FieldNamingPolicy;
@@ -46,7 +47,7 @@ public class ApiModule {
 
 */
 
-    @Provides
+    /*@Provides
     @PerActivity
     Cache provideOkHttpCache(Context context) {
         int cacheSize = 10 * 1024 * 1024; // 10 MiB
@@ -97,7 +98,18 @@ public class ApiModule {
     @PerActivity
     AccountLoader provideAccountApiLoader(Retrofit retrofit) {
         return new AccountLoader(retrofit);
+    }*/
+
+    @Provides
+    @PerActivity
+    AccountLoader provideAccountApiLoader(Retrofit retrofit) {
+        return new AccountLoader(retrofit);
     }
 
+    @Provides
+    @PerActivity
+    BeatClipLoader provideBeatClipLoader(Retrofit retrofit) {
+        return new BeatClipLoader(retrofit);
+    }
 
 }
