@@ -6,15 +6,15 @@ package com.camino.data.api;
 public interface MiscellaneousApiService {
 
 /*
-    @GET("/playStoreVersion.json")
+    @GET("playStoreVersion.json")
     Observable<List<AndroidVersion>> getVersionInfo();
 
     //notifactions
 
-    @PUT("/notifications")
+    @PUT("notifications")
     Observable<Response> updateNotification(@Header("Authorization") String authorization, @Body GcmDataItem gcmDataItem);
 
-    @DELETE("/notifications/{MD5}")
+    @DELETE("notifications/{MD5}")
     Observable<Response> deleteNotification(@Header("Authorization") String authorization, @Path("MD5") String md5hash);
 */
 

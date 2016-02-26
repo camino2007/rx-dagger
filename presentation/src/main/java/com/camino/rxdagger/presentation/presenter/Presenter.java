@@ -5,6 +5,9 @@ package com.camino.rxdagger.presentation.presenter;
  */
 public interface Presenter {
 
+    /**
+     * loads the data at first sight
+     */
     void initialize();
 
     /**

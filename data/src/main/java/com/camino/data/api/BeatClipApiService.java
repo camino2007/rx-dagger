@@ -21,42 +21,42 @@ import rx.Observable;
  */
 public interface BeatClipApiService {
 
-    @GET("/beatclips/createdby/{externalId}")
+    @GET("beatclips/createdby/{externalId}")
     Observable<List<BeatClip>> getBeatclipsForUser(@Header("Authorization") String authorization, @Path("externalId") String externalId);
 
-    @GET("/beatclips/howto?platform=android")
+    @GET("beatclips/howto?platform=android")
     Observable<BeatClip> getHowTo();
 
-    @GET("/beatclips/{externalId}")
+    @GET("beatclips/{externalId}")
     Observable<BeatClip> getBeatClipById(@Path("externalId") String externalId);
 
-    @GET("/beatclips/latest/")
+    @GET("beatclips/latest/")
     Observable<List<BeatClip>> getLatestBeatclips(@Header("Authorization") String authorization);
 
-    @GET("/beatclips/latest;offsetId={offsetId}")
+    @GET("beatclips/latest;offsetId={offsetId}")
     Observable<List<BeatClip>> getLatestBeatclipsWithOffset(@Header("Authorization") String authorization, @Path("offsetId") String offsetId);
 
-    @PUT("/beatclips/{externalId}/like")
+    @PUT("beatclips/{externalId}/like")
     Observable<BeatClip> likeClip(@Header("Authorization") String authorization, @Path("externalId") String externalId);
 
-    @DELETE("/beatclips/{externalId}/like")
+    @DELETE("beatclips/{externalId}/like")
     Observable<BeatClip> unlikeClip(@Header("Authorization") String authorization, @Path("externalId") String externalId);
 
-    @POST("/beatclips/")
+    @POST("beatclips/")
     Observable<BeatClip> createBeatclip(@Header("Authorization") String authorization, @Body BeatClip beatClip);
 
-    @PUT("/beatclips/{externalId}")
+    @PUT("beatclips/{externalId}")
     Observable<BeatClip> editBeatclip(@Header("Authorization") String authorization, @Path("externalId") String externalId, @Body BeatClip clip);
 
-    @DELETE("/beatclips/{externalId}")
+    @DELETE("beatclips/{externalId}")
     Observable<Response> deleteBeatclip(@Header("Authorization") String authorization, @Path("externalId") String externalId);
 
     @Headers({"Content-type: video/mp4"})
-    @POST("/beatclips/{externalId};reencode=false")
+    @POST("beatclips/{externalId};reencode=false")
     Observable<Response> uploadBeatclip(@Header("Authorization") String authorization, @Path("externalId") String externalId, @Body RequestBody beatclip);
 
 /*
-    @POST("/beatclips/{externalId}/share")
+    @POST("beatclips/{externalId}/share")
     Observable<Response> shareClipOnServer(@Header("Authorization") String authorization, @Path("externalId") String externalId, @Body ClipToShareItem clipToShareItem);
 */
 

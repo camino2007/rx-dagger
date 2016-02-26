@@ -3,9 +3,8 @@ package com.camino.rxdagger.presentation.internal.components;
 import com.camino.rxdagger.presentation.internal.PerActivity;
 import com.camino.rxdagger.presentation.internal.modules.ActivityModule;
 import com.camino.rxdagger.presentation.internal.modules.ApiModule;
+import com.camino.rxdagger.presentation.view.fragment.HomeFragment;
 import com.camino.rxdagger.presentation.view.fragment.MainFragment;
-
-import javax.inject.Singleton;
 
 import dagger.Component;
 
@@ -16,5 +15,7 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class, modules = {ActivityModule.class, ApiModule.class})
 public interface ApiComponent extends ActivityComponent {
     void inject(MainFragment mainFragment);
+
+    void inject(HomeFragment homeFragment);
 
 }
