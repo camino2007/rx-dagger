@@ -6,6 +6,7 @@ import com.camino.rxdagger.presentation.internal.modules.ApiModule;
 import com.camino.rxdagger.presentation.view.fragment.MainFragment;
 
 import dagger.Component;
+import okhttp3.Cache;
 
 /**
  * Created by robert on 24.02.16.
