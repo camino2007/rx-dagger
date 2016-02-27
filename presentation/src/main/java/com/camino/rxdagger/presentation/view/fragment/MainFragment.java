@@ -36,11 +36,13 @@ public class MainFragment extends BaseFragment implements MainView {
 
     @Inject MainViewPresenter mMainViewPresenter;
 
+
     public static MainFragment initMainFragment(int destinationIndex) {
         Bundle b = new Bundle();
         b.putInt(KEY_DESTINATION_FRAGMENT_INDEX, destinationIndex);
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(b);
+
         return mainFragment;
     }
 
@@ -62,7 +64,6 @@ public class MainFragment extends BaseFragment implements MainView {
             mViewPager.setCurrentItem(viewPagerIndex);
             mViewPager.setAdapter(new MainViewPageAdapter(getChildFragmentManager()));
             mViewPager.setOffscreenPageLimit(MAX_COUNT);
-            mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
             mTabLayout.setupWithViewPager(mViewPager);
             addTabsToTabLayout();
         }
