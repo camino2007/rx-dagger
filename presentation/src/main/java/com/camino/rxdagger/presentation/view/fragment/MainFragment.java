@@ -36,21 +36,6 @@ public class MainFragment extends BaseFragment implements MainView {
 
     @Inject MainViewPresenter mMainViewPresenter;
 
-    private int[] mTabResId = {
-            R.mipmap.ic_home,
-            R.mipmap.ic_explore,
-            R.mipmap.ic_news,
-            R.mipmap.ic_profile,
-    };
-
-    private int[] mActiveTabResId = {
-            R.mipmap.ic_home_active,
-            R.mipmap.ic_explore_active,
-            R.mipmap.ic_news_active,
-            R.mipmap.ic_profile_active,
-    };
-
-
     public static MainFragment initMainFragment(int destinationIndex) {
         Bundle b = new Bundle();
         b.putInt(KEY_DESTINATION_FRAGMENT_INDEX, destinationIndex);
@@ -73,40 +58,21 @@ public class MainFragment extends BaseFragment implements MainView {
         Log.d(getTagText(), "onViewCreated");
         if (savedInstanceState == null) {
             mMainViewPresenter.initialize();
-            mViewPager.setAdapter(new MainViewPageAdapter(getChildFragmentManager(), getContext()));
-            mTabLayout.setupWithViewPager(mViewPager);
-            mViewPager.setOffscreenPageLimit(MAX_COUNT);
-            mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                @Override
-                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                }
-
-                @Override
-                public void onPageSelected(int position) {
-                    changeTabIcon(position);
-                }
-
-                @Override
-                public void onPageScrollStateChanged(int state) {
-                }
-            });
             int viewPagerIndex = getArguments().getInt(KEY_DESTINATION_FRAGMENT_INDEX);
             mViewPager.setCurrentItem(viewPagerIndex);
+            mViewPager.setAdapter(new MainViewPageAdapter(getChildFragmentManager()));
+            mViewPager.setOffscreenPageLimit(MAX_COUNT);
+            mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            mTabLayout.setupWithViewPager(mViewPager);
+            addTabsToTabLayout();
         }
     }
 
-    private void changeTabIcon(int position) {
-        TabLayout.Tab tab;
-        for (int i = 0; i < mTabResId.length; i++) {
-            tab = mTabLayout.getTabAt(position);
-            if (tab != null) {
-                if (position == i) {
-                    tab.setIcon(mActiveTabResId[position]);
-                } else {
-                    tab.setIcon(mTabResId[position]);
-                }
-            }
-        }
+    private void addTabsToTabLayout() {
+        mTabLayout.getTabAt(0).setIcon(R.drawable.main_tab_home);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.main_tab_explore);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.main_tab_news);
+        mTabLayout.getTabAt(3).setIcon(R.drawable.main_tab_profile);
     }
 
     @Override
@@ -173,15 +139,10 @@ public class MainFragment extends BaseFragment implements MainView {
         return getContext();
     }
 
-    @SuppressWarnings("deprecation")
     private class MainViewPageAdapter extends FragmentStatePagerAdapter {
 
-
-        private Context mContext;
-
-        public MainViewPageAdapter(FragmentManager fm, Context context) {
+        public MainViewPageAdapter(FragmentManager fm) {
             super(fm);
-            mContext = context;
         }
 
         @Override
@@ -209,19 +170,5 @@ public class MainFragment extends BaseFragment implements MainView {
             return MAX_COUNT;
         }
 
-/*        @Override
-        public CharSequence getPageTitle(int position) {
-            Drawable image;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                image = getResources().getDrawable(mTabResId[position], mContext.getTheme());
-            } else {
-                image = getResources().getDrawable(mTabResId[position]);
-            }
-            image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-            SpannableString sb = new SpannableString(" ");
-            ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-            sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            return sb;
-        }*/
     }
 }
