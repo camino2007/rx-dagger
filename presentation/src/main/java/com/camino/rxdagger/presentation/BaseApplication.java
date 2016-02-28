@@ -2,9 +2,9 @@ package com.camino.rxdagger.presentation;
 
 import android.app.Application;
 
-import com.camino.rxdagger.presentation.internal.components.AppComponent;
-import com.camino.rxdagger.presentation.internal.components.DaggerAppComponent;
-import com.camino.rxdagger.presentation.internal.modules.AppModule;
+import com.camino.rxdagger.presentation.internal.di.components.AppComponent;
+import com.camino.rxdagger.presentation.internal.di.components.DaggerAppComponent;
+import com.camino.rxdagger.presentation.internal.di.modules.AppModule;
 import com.squareup.leakcanary.LeakCanary;
 
 /**

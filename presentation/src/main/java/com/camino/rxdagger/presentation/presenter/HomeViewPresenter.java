@@ -5,14 +5,12 @@ import android.util.Log;
 import com.camino.data.DefaultSubscriber;
 import com.camino.data.loader.BeatClipLoader;
 import com.camino.data.model.BeatClip;
-import com.camino.rxdagger.presentation.internal.PerActivity;
+import com.camino.rxdagger.presentation.internal.di.PerActivity;
 import com.camino.rxdagger.presentation.view.HomeView;
 
 import java.util.List;
 
 import javax.inject.Inject;
-
-import rx.Observable;
 
 /**
  * Created by robert on 26.02.16.

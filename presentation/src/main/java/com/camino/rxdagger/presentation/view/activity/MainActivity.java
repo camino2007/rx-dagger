@@ -1,40 +1,56 @@
 package com.camino.rxdagger.presentation.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.camino.rxdagger.presentation.R;
-import com.camino.rxdagger.presentation.internal.HasComponent;
-import com.camino.rxdagger.presentation.internal.components.ApiComponent;
-import com.camino.rxdagger.presentation.internal.components.DaggerApiComponent;
-import com.camino.rxdagger.presentation.internal.modules.ApiModule;
+import com.camino.rxdagger.presentation.internal.di.HasComponent;
+import com.camino.rxdagger.presentation.internal.di.components.ApiComponent;
+import com.camino.rxdagger.presentation.internal.di.components.DaggerApiComponent;
+import com.camino.rxdagger.presentation.internal.di.modules.ApiModule;
 import com.camino.rxdagger.presentation.view.fragment.MainFragment;
 
-public class MainActivity extends BaseActivity implements HasComponent<ApiComponent> {
+import butterknife.Bind;
+import butterknife.OnClick;
+
+public class MainActivity extends BaseActivity implements HasComponent<ApiComponent>, MainFragment.OnViewPageListener {
+
+    @Bind(R.id.toolbar) Toolbar mToolbar;
+   // @Bind(R.id.fab) FloatingActionButton mActionButton;
 
     private ApiComponent mApiComponent;
+    private String[] mActionBarTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        setSupportActionBar(mToolbar);
+/*        mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            *//*    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*//*
+                mNavigator.navigateToCreateBeatClip(MainActivity.this);
             }
-        });
+        });*/
         initializeInjector();
+        mActionBarTitles = new String[]{
+                getResources().getString(R.string.main_view_ab_title_home),
+                getResources().getString(R.string.main_view_ab_title_explore),
+                getResources().getString(R.string.main_view_ab_title_news),
+                getResources().getString(R.string.main_view_ab_title_profile)
+        };
+    }
+
+    @OnClick(R.id.fab)
+    public void onActionButtonClicked(){
+        //mNavigator.navigateToCreateBeatClip(this);
+        Intent intentToLaunch = BeatClipCreateActivity.getCallingIntent(this);
+        startActivity(intentToLaunch);
     }
 
     @Override
@@ -52,13 +68,18 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
         mApiComponent = DaggerApiComponent.builder()
                 .appComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
-                .apiModule(new ApiModule("http://stage.beatclip.com/api/"))
+                .apiModule(new ApiModule())
                 .build();
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initActionBar() {
+        mToolbar.setTitle(getString(R.string.main_view_ab_title_home));
     }
 
     @Override
@@ -86,5 +107,12 @@ public class MainActivity extends BaseActivity implements HasComponent<ApiCompon
     @Override
     public ApiComponent getComponent() {
         return mApiComponent;
+    }
+
+    @Override
+    public void onViewPageSelected(int position) {
+        if (mToolbar != null) {
+            mToolbar.setTitle(mActionBarTitles[position]);
+        }
     }
 }

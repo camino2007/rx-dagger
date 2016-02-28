@@ -1,8 +1,8 @@
-package com.camino.rxdagger.presentation.internal.components;
+package com.camino.rxdagger.presentation.internal.di.components;
 
-import com.camino.rxdagger.presentation.internal.PerActivity;
-import com.camino.rxdagger.presentation.internal.modules.ActivityModule;
-import com.camino.rxdagger.presentation.internal.modules.ApiModule;
+import com.camino.rxdagger.presentation.internal.di.PerActivity;
+import com.camino.rxdagger.presentation.internal.di.modules.ActivityModule;
+import com.camino.rxdagger.presentation.internal.di.modules.ApiModule;
 import com.camino.rxdagger.presentation.view.fragment.HomeFragment;
 import com.camino.rxdagger.presentation.view.fragment.MainFragment;
 

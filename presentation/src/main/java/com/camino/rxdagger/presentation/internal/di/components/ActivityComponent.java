@@ -1,9 +1,9 @@
-package com.camino.rxdagger.presentation.internal.components;
+package com.camino.rxdagger.presentation.internal.di.components;
 
 import android.app.Activity;
 
-import com.camino.rxdagger.presentation.internal.PerActivity;
-import com.camino.rxdagger.presentation.internal.modules.ActivityModule;
+import com.camino.rxdagger.presentation.internal.di.PerActivity;
+import com.camino.rxdagger.presentation.internal.di.modules.ActivityModule;
 
 import dagger.Component;
 
@@ -14,7 +14,7 @@ import dagger.Component;
  * Activity-level components should extend this component.
  * <p/>
  * Subtypes of ActivityComponent should be decorated with annotation:
- * {@link com.camino.rxdagger.presentation.internal.PerActivity}
+ * {@link PerActivity}
  */
 @PerActivity
 @Component(dependencies = AppComponent.class, modules = ActivityModule.class)

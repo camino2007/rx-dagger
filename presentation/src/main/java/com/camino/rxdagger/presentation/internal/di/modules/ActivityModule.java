@@ -1,8 +1,8 @@
-package com.camino.rxdagger.presentation.internal.modules;
+package com.camino.rxdagger.presentation.internal.di.modules;
 
 import android.app.Activity;
 
-import com.camino.rxdagger.presentation.internal.PerActivity;
+import com.camino.rxdagger.presentation.internal.di.PerActivity;
 
 import dagger.Module;
 import dagger.Provides;

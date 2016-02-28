@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.camino.rxdagger.presentation.internal.HasComponent;
+import com.camino.rxdagger.presentation.internal.di.HasComponent;
 
 import butterknife.ButterKnife;
 

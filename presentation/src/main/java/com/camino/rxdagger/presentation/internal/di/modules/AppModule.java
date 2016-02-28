@@ -1,4 +1,4 @@
-package com.camino.rxdagger.presentation.internal.modules;
+package com.camino.rxdagger.presentation.internal.di.modules;
 
 import android.content.Context;
 
@@ -88,17 +88,5 @@ public class AppModule {
                 .client(okHttpClient)
                 .build();
     }
-
-/*    @Provides
-    @Singleton
-    AccountLoader provideAccountApiLoader(Retrofit retrofit) {
-        return new AccountLoader(retrofit);
-    }
-
-    @Provides
-    @Singleton
-    BeatClipLoader provideBeatClipLoader(Retrofit retrofit) {
-        return new BeatClipLoader(retrofit);
-    }*/
 
 }

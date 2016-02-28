@@ -3,9 +3,10 @@ package com.camino.rxdagger.presentation.presenter;
 import android.util.Log;
 
 import com.camino.data.DefaultSubscriber;
+import com.camino.data.enums.ProcessingState;
 import com.camino.data.loader.AccountLoader;
 import com.camino.data.model.User;
-import com.camino.rxdagger.presentation.internal.PerActivity;
+import com.camino.rxdagger.presentation.internal.di.PerActivity;
 import com.camino.rxdagger.presentation.view.MainView;
 
 import java.util.List;
@@ -84,6 +85,7 @@ public class MainViewPresenter implements Presenter {
         public void onCompleted() {
             Log.d(TAG, "onCompleted");
             MainViewPresenter.this.hideViewLoading();
+            mAccountLoader.setProcessingState(ProcessingState.DONE);
         }
 
         @Override
@@ -92,6 +94,7 @@ public class MainViewPresenter implements Presenter {
             MainViewPresenter.this.hideViewLoading();
             // MainViewPresenter.this.showErrorMessage(new DefaultErrorBundle((Exception) e));
             MainViewPresenter.this.showViewRetry();
+            mAccountLoader.setProcessingState(ProcessingState.ERROR);
         }
 
         @Override

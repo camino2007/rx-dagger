@@ -1,4 +1,4 @@
-package com.camino.rxdagger.presentation.internal;
+package com.camino.rxdagger.presentation.internal.di;
 
 /**
  * Created by robert on 25.02.16.

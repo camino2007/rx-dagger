@@ -7,8 +7,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.camino.rxdagger.presentation.BaseApplication;
-import com.camino.rxdagger.presentation.internal.components.AppComponent;
-import com.camino.rxdagger.presentation.internal.modules.ActivityModule;
+import com.camino.rxdagger.presentation.internal.di.components.AppComponent;
+import com.camino.rxdagger.presentation.internal.di.modules.ActivityModule;
+import com.camino.rxdagger.presentation.navigation.Navigator;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -17,11 +20,14 @@ import butterknife.ButterKnife;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @Inject Navigator mNavigator;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
+        initActionBar();
         initializeActivity(savedInstanceState);
     }
 
@@ -47,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Get the Main Application component for dependency injection.
      *
-     * @return {@link com.camino.rxdagger.presentation.internal.components.AppComponent}
+     * @return {@link com.camino.rxdagger.presentation.internal.di.components.AppComponent}
      */
     protected AppComponent getApplicationComponent() {
         return ((BaseApplication) getApplication()).getAppComponent();
@@ -56,7 +62,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * Get an Activity module for dependency injection.
      *
-     * @return {@link com.camino.rxdagger.presentation.internal.modules.ActivityModule}
+     * @return {@link com.camino.rxdagger.presentation.internal.di.modules.ActivityModule}
      */
     protected ActivityModule getActivityModule() {
         return new ActivityModule(this);
@@ -64,6 +70,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     protected abstract int getLayoutId();
+
+    protected abstract void initActionBar();
 
     protected abstract void initializeActivity(Bundle savedInstanceState);
 

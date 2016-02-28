@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">RxDagger</string>
     <string name="action_settings">Settings</string>
+
+    <string name="main_view_ab_title_home">Home</string>
+    <string name="main_view_ab_title_explore">Explore</string>
+    <string name="main_view_ab_title_news">News</string>
+    <string name="main_view_ab_title_profile">Profile</string>
+
+    <string name="create_beatclip_view_ab_title">Create a beatclip</string>
 </resources>

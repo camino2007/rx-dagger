@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.camino.rxdagger.presentation.R;
-import com.camino.rxdagger.presentation.internal.components.ApiComponent;
+import com.camino.rxdagger.presentation.internal.di.components.ApiComponent;
 import com.camino.rxdagger.presentation.presenter.HomeViewPresenter;
 import com.camino.rxdagger.presentation.view.HomeView;
 

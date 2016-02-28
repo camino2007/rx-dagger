@@ -1,9 +1,8 @@
-package com.camino.rxdagger.presentation.internal.components;
+package com.camino.rxdagger.presentation.internal.di.components;
 
 import android.content.Context;
 
-import com.camino.data.loader.AccountLoader;
-import com.camino.rxdagger.presentation.internal.modules.AppModule;
+import com.camino.rxdagger.presentation.internal.di.modules.AppModule;
 import com.camino.rxdagger.presentation.util.BeatclipShortDateTypeAdapter;
 import com.camino.rxdagger.presentation.view.activity.BaseActivity;
 import com.google.gson.Gson;

@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.camino.data.model.User;
 import com.camino.rxdagger.presentation.R;
-import com.camino.rxdagger.presentation.internal.components.ApiComponent;
+import com.camino.rxdagger.presentation.internal.di.components.ApiComponent;
 import com.camino.rxdagger.presentation.presenter.MainViewPresenter;
 import com.camino.rxdagger.presentation.view.MainView;
 
@@ -22,6 +22,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnPageChange;
 
 /**
  * Created by robert on 25.02.16.
@@ -37,13 +38,20 @@ public class MainFragment extends BaseFragment implements MainView {
     @Inject MainViewPresenter mMainViewPresenter;
 
 
+    private OnViewPageListener mViewPageListener;
+
     public static MainFragment initMainFragment(int destinationIndex) {
         Bundle b = new Bundle();
         b.putInt(KEY_DESTINATION_FRAGMENT_INDEX, destinationIndex);
         MainFragment mainFragment = new MainFragment();
         mainFragment.setArguments(b);
-
         return mainFragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mViewPageListener = (OnViewPageListener) context;
     }
 
     @Override
@@ -51,6 +59,7 @@ public class MainFragment extends BaseFragment implements MainView {
         super.onCreate(savedInstanceState);
         this.getComponent(ApiComponent.class).inject(this);
         setRetainInstance(true);
+
     }
 
     @Override
@@ -59,21 +68,44 @@ public class MainFragment extends BaseFragment implements MainView {
         mMainViewPresenter.setMainView(this);
         Log.d(getTagText(), "onViewCreated");
         if (savedInstanceState == null) {
+            Log.d(getTagText(), "savedInstanceState == null");
             mMainViewPresenter.initialize();
             int viewPagerIndex = getArguments().getInt(KEY_DESTINATION_FRAGMENT_INDEX);
             mViewPager.setCurrentItem(viewPagerIndex);
             mViewPager.setAdapter(new MainViewPageAdapter(getChildFragmentManager()));
             mViewPager.setOffscreenPageLimit(MAX_COUNT);
             mTabLayout.setupWithViewPager(mViewPager);
+            mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            mTabLayout.setTabMode(TabLayout.MODE_FIXED);
             addTabsToTabLayout();
         }
     }
 
     private void addTabsToTabLayout() {
-        mTabLayout.getTabAt(0).setIcon(R.drawable.main_tab_home);
-        mTabLayout.getTabAt(1).setIcon(R.drawable.main_tab_explore);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.main_tab_news);
-        mTabLayout.getTabAt(3).setIcon(R.drawable.main_tab_profile);
+        TabLayout.Tab tabHome = mTabLayout.getTabAt(0);
+        if (tabHome != null) {
+            tabHome.setIcon(R.drawable.main_tab_home);
+        }
+        TabLayout.Tab tabExplore = mTabLayout.getTabAt(1);
+        if (tabExplore != null) {
+            tabExplore.setIcon(R.drawable.main_tab_explore);
+        }
+        TabLayout.Tab tabNews = mTabLayout.getTabAt(2);
+        if (tabNews != null) {
+            tabNews.setIcon(R.drawable.main_tab_news);
+        }
+        TabLayout.Tab tabProfile = mTabLayout.getTabAt(3);
+        if (tabProfile != null) {
+            tabProfile.setIcon(R.drawable.main_tab_profile);
+        }
+    }
+
+    @OnPageChange(R.id.fragment_main_pager)
+    public void onPageSelected(int position) {
+        Log.d(getTagText(), "onPageSelected: " + position);
+        if (mViewPageListener != null) {
+            mViewPageListener.onViewPageSelected(position);
+                }
     }
 
     @Override
@@ -171,5 +203,9 @@ public class MainFragment extends BaseFragment implements MainView {
             return MAX_COUNT;
         }
 
+    }
+
+    public interface OnViewPageListener{
+        void onViewPageSelected(int position);
     }
 }
