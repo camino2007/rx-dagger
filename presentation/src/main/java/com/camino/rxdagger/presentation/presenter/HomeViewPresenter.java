@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import rx.Observable;
+
 /**
  * Created by robert on 26.02.16.
  */
@@ -37,8 +39,8 @@ public class HomeViewPresenter implements Presenter {
         Log.d(TAG, "initialize");
        /* this.hideViewRetry();
         this.showViewLoading();*/
-/*        Observable observable = mBeatClipLoader.getLatestBeatClipsObservable();
-        mBeatClipLoader.execute(observable, new ResultSubscriber());*/
+        Observable observable = mBeatClipLoader.getLatestBeatClipsObservable();
+        mBeatClipLoader.execute(observable, new ResultSubscriber());
     }
 
     @Override
@@ -54,6 +56,10 @@ public class HomeViewPresenter implements Presenter {
     @Override
     public void destroy() {
 
+    }
+
+    private void showResult(List<BeatClip> beatClipList) {
+mHomeView.showResult(beatClipList);
     }
 
     private class ResultSubscriber extends DefaultSubscriber<List<BeatClip>> {
@@ -74,7 +80,10 @@ public class HomeViewPresenter implements Presenter {
         @Override
         public void onNext(List<BeatClip> beatClipList) {
             Log.d(TAG, "onNext - beatClipList.size(): " + beatClipList.size());
-            //MainViewPresenter.this.showResult(userList);
+            HomeViewPresenter.this.showResult(beatClipList);
+
         }
     }
+
+
 }

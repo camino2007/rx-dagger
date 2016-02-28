@@ -3,4 +3,10 @@
     <color name="colorPrimary">#218ee0</color>
     <color name="colorPrimaryDark">#114b77</color>
     <color name="colorAccent">#218ee0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_transparent">#CD000000</color>
+
+    <!--Beatclip item-->
+    <color name="item_beatclip_gradient_start">#004d78bd</color>
+    <color name="item_beatclip_gradient_end">#994d78bd</color>
 </resources>

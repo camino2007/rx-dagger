@@ -72,6 +72,8 @@ dependencies {
     compile presentationDependencies.retrofitGsonConverter
     compile presentationDependencies.retrofitRxAdapter
     compile presentationDependencies.okHttp
+    compile presentationDependencies.circleImageView
+    compile presentationDependencies.glide
 
     //Development
     compile developmentDependencies.leakCanary
