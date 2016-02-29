@@ -19,6 +19,7 @@ public class BeatClipCreateFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getComponent(BeatClipCreateComponent.class).inject(this);
+        setRetainInstance(true);
     }
 
     @Override
